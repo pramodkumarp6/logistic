@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+     <variable
+         name="homeViewModel"
+         type="com.pramod.logistic.viewmodel.HomeViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.pramod.logistic.HomeActivity">
+
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="310dp"
+
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="306dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="316dp"
+            android:scaleType="fitXY" />
+
+
+    </RelativeLayout>
+</layout>
