@@ -20,7 +20,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("/simple/public/createuser")
-    Observable<RegisterResponse> userCreate(@Field("email") String email,
+    Observable<RegisterResponse> createUser(@Field("email") String email,
                                             @Field("password") String password,
                                             @Field("name") String name,
                                             @Field("school") String school

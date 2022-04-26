@@ -7,8 +7,10 @@ import android.widget.Toast;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pramod.logistic.model.RegisterResponse;
 import com.pramod.logistic.repository.RegisterRepository;
 
 public class RegisterViewModel extends ViewModel {
@@ -19,50 +21,67 @@ public class RegisterViewModel extends ViewModel {
     public ObservableField<String>password = new ObservableField<>();
     public ObservableField<String>name = new ObservableField<>();
     public ObservableField<String>school = new ObservableField<>();
+    private MutableLiveData<String> vaidate = new MutableLiveData<>();
 
 
+    public LiveData<String> getVaidate() {
+        return vaidate;
+    }
 
     public RegisterViewModel(Context context, RegisterUser registerUser) {
         this.registerUser = registerUser;
         this.context = context;
     }
 
-    public LiveData getData() {
-        registerRepository  = new RegisterRepository();
-        return registerRepository.getValue();
-
-
-    }
 
 
 
 
     public void onRegister(){
-        registerModel();
+        register();
+        Validate();
+
     }
 
-    private void registerModel() {
-        if(TextUtils.isEmpty(email.get())){
-            Toast.makeText(context, "Email is Required", Toast.LENGTH_SHORT).show();
-            return;
 
-        }
+    /*public LiveData<RegisterResponse> getData() {
+        registerRepository  = new RegisterRepository();
+        return registerRepository.getData();
+    }*/
 
-        if(TextUtils.isEmpty(password.get())){
-            Toast.makeText(context, "Password Is Required", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(TextUtils.isEmpty(name.get())){
-            Toast.makeText(context, "Name is Required", Toast.LENGTH_SHORT).show();
-            return;
 
-        }
 
-        if(TextUtils.isEmpty(school.get())){
-            Toast.makeText(context, "School Is Required", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        registerRepository = new RegisterRepository();
-        registerRepository.getRegister(email.get(),password.get(),name.get(),school.get());
+
+public void Validate(){
+    if(TextUtils.isEmpty(email.get())){
+        vaidate.setValue("Email is Required");
+        return;
+
+    }
+
+    if(TextUtils.isEmpty(password.get())){
+        vaidate.setValue("Password is Required");
+
+        return;
+    }
+    if(TextUtils.isEmpty(name.get())){
+        vaidate.setValue("Name is Required");
+
+        return;
+
+    }
+
+    if(TextUtils.isEmpty(school.get())){
+        vaidate.setValue("School is Required");
+
+        return;
+    }
+}
+
+
+    public LiveData<RegisterResponse> register() {
+
+         registerRepository = new RegisterRepository();
+        return registerRepository.getRegister(email.get(),  password.get(),  name.get(), school.get());
     }
 }

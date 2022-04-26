@@ -17,14 +17,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
 
-    private static final String AUTH = "Basic " + Base64.encodeToString(("user:123456").getBytes(), Base64.NO_WRAP);
+    //private static final String AUTH = "Basic " + Base64.encodeToString(("user:123456").getBytes(), Base64.NO_WRAP);
 
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
 
 
     private  RetrofitClient() {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        /*OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(
                         new Interceptor() {
                             @Override
@@ -40,7 +40,7 @@ public class RetrofitClient {
                             }
                         }
                 ).build();
-
+*/
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

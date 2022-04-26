@@ -26,10 +26,11 @@ import java.util.List;
 public class UserDetailsFragment extends Fragment {
     private FragmentSlideshowBinding binding;
     private UserDetailsAdapter userDetailsAdapter;
+    private UserDetailsViewModel userDetailsViewModel;
     private List<Users> users;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        UserDetailsViewModel slideshowViewModel = new ViewModelProvider(this).get(UserDetailsViewModel.class);
+        userDetailsViewModel = new ViewModelProvider(this).get(UserDetailsViewModel.class);
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_slideshow, container, false);
         View view = binding.getRoot();
@@ -40,7 +41,7 @@ public class UserDetailsFragment extends Fragment {
 
 
 
-        slideshowViewModel.getUserDetails().observe(getViewLifecycleOwner(), new Observer<UserResponse>() {
+        userDetailsViewModel.getUserDetails().observe(getViewLifecycleOwner(), new Observer<UserResponse>() {
             @Override
             public void onChanged(UserResponse userResponse) {
                 if (!userResponse.isError()) {

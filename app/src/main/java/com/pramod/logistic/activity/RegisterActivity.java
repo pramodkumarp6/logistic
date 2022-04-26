@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.pramod.logistic.R;
 import com.pramod.logistic.databinding.ActivityRegisterBinding;
+import com.pramod.logistic.model.RegisterResponse;
 import com.pramod.logistic.viewmodel.RegisterUser;
 import com.pramod.logistic.viewmodel.RegisterViewModel;
 import com.pramod.logistic.viewmodel.RegisterViewModelFactory;
@@ -27,11 +28,19 @@ public class RegisterActivity extends AppCompatActivity {
         registerViewModel = new ViewModelProvider(this,new RegisterViewModelFactory(this,new RegisterUser())).get(RegisterViewModel.class);
         resgisterBinding.setRegisterViewModel(registerViewModel);
 
-        registerViewModel.getData().observe(this, new Observer<String>() {
+        registerViewModel.getVaidate().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                Log.e(s,"pramodkumar");
                 Toast.makeText(RegisterActivity.this, s, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        registerViewModel.register().observe(this, new Observer<RegisterResponse>() {
+            @Override
+            public void onChanged(RegisterResponse s) {
+                Log.e(s.getMessage(),"pramodkumar");
+                Toast.makeText(RegisterActivity.this, s.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
